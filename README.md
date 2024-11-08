@@ -6,13 +6,14 @@
 
 The only thing this app does, is appear in your share menu. I absolutely don't have any Android development experience (contributions/feedback is welcome!), but I wanted to have this feature, so I built it.
 
-If you share a link, the share menu will now contain three entries from this App:
+If you share a link or text, the share menu will now contain three entries from this App:
 
 - Discuss -> This will redirect you to https://kagi.com/discussdocs?url= + the url you shared
 - Summarize -> This will redirect you to https://kagi.com/summarizer?summary=summary&url= + the url you shared
-- Takeway -> This will redirect you to https://kagi.com/summarizer?summary=takeway&url= + the url you shared
+- Takeaway -> This will redirect you to https://kagi.com/summarizer?summary=takeway&url= + the url you shared
+- Translate -> This will redirect you to https://translate.kagi.com + the parameters you configured in the settings (works with text and URLs)
 
-If you share a text snippet instead of a URL, all three will still appear, but "Discuss" does currently not work without an URL provided (limitation on Kagi's side) and you'll only get a toast notification that you can only share URLs with "Discuss" and not text.
+If you share a text snippet instead of a URL, all four will still appear, but "Discuss" does not work without an URL provided and you'll only get a toast notification that you can only share URLs with "Discuss" and not text.
 
 ## Installation
 
@@ -22,13 +23,15 @@ Or clone this repository and build it yourself with Android Studio
 
 ## Settings
 
-There are currently two settings options:
-
 ### Summary Language
 
 Here you can select your default summary language, this does the same as the language selection on https://kagi.com/summarize.
 The default value is "Default", this is also the same as on kagi.com, this way it uses the language of the summarized document.
 
+### Translation Language
+
+You can select a default source and target language. It makes sense to leave the source language on Automatic, except you know that you only want to translate from one specific language.
+This takes effect for both text and URLs. The values were copied straight from https://translate.kagi.com 
 
 ### Custom Tabs
 

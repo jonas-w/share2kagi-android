@@ -105,8 +105,13 @@ class HandleShare {
             val builder = Uri.Builder().scheme("https").authority("translate.kagi.com")
 
             if (urlMatcher.matches()) {
-                builder.path(
-                    sourceLanguage + "/" + targetLanguage + "/" + urlMatcher.group().toString()
+                if (sourceLanguage != "Automatic") {
+                    builder.appendPath(
+                        sourceLanguage
+                    )
+                }
+                builder.appendPath(targetLanguage).appendEncodedPath(
+                    urlMatcher.group().toString()
                 )
             } else {
                 // there is also a model parameter, only known value is "fast" though
