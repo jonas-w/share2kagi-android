@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Kagi Summarizer</string>
+    <string name="app_name">Share2Kagi</string>
     <drawable name="app_icon">@mipmap/kagi_launcher_icon</drawable>
     <drawable name="app_icon_round">@mipmap/kagi_launcher_icon_round</drawable>
     <string name="activity_summary">Summary</string>
     <string name="activity_takeaway">Key Moments</string>
     <string name="activity_discuss">Discuss</string>
-    <string name="title_activity_main">Kagi Summarizer</string>
+    <string name="title_activity_main">Share2Kagi</string>
     <string name="activity_translate">Translate</string>
+    <string name="activity_reverse_image">URL Reverse Image Search</string>
 </resources>

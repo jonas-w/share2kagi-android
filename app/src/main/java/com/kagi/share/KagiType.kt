@@ -1,7 +1,8 @@
-package com.kagi.summarizer
+package com.kagi.share
 
 sealed class KagiType {
     data object TRANSLATE : KagiType()
+    data object IMAGE : KagiType()
 
     sealed class SUMMARY : KagiType() {
         data object DISCUSS : SUMMARY()

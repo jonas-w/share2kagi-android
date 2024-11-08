@@ -1,11 +1,11 @@
-package com.kagi.summarizer
+package com.kagi.share
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 
-class TranslateActivity : ComponentActivity() {
+class TakeawayActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        HandleShare.openKagi(this, KagiType.TRANSLATE)
+        HandleShare.openKagi(this, KagiType.SUMMARY.TAKEAWAY)
     }
 }

@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Kagi Summarizer"
+rootProject.name = "Share2Kagi"
 include(":app")

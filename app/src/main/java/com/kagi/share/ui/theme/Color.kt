@@ -1,4 +1,4 @@
-package com.kagi.summarizer.ui.theme
+package com.kagi.share.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

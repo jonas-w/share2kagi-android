@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.kagi.summarizer"
+    namespace = "com.kagi.share"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.kagi.summarizer"
+        applicationId = "com.kagi.share"
         minSdk = 29
         targetSdk = 35
         versionCode = 1
@@ -22,7 +22,7 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-dev"
-            resValue("string", "app_name", "(Debug) Kagi Summarizer")
+            resValue("string", "app_name", "Share2Kagi (debug)")
             resValue("drawable", "app_icon", "@mipmap/kagi_launcher_debug")
             resValue("drawable", "app_icon_round", "@mipmap/kagi_launcher_debug_round")
             isDebuggable = true
@@ -35,7 +35,7 @@ android {
             )
             signingConfig = signingConfigs.getByName("debug")
 
-            resValue("string", "app_name", "Kagi Summarizer")
+            resValue("string", "app_name", "Share2Kagi")
             resValue("drawable", "app_icon", "@mipmap/kagi_launcher_icon")
             resValue("drawable", "app_icon_round", "@mipmap/kagi_launcher_icon_round")
         }
