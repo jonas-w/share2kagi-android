@@ -1,4 +1,7 @@
 <resources>
+    <string name="app_name">Kagi Summarizer</string>
+    <drawable name="app_icon">@mipmap/kagi_launcher_icon</drawable>
+    <drawable name="app_icon_round">@mipmap/kagi_launcher_icon_round</drawable>
     <string name="activity_summary">Summary</string>
     <string name="activity_takeaway">Key Moments</string>
     <string name="activity_discuss">Discuss</string>

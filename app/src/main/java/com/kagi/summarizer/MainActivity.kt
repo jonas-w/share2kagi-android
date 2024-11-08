@@ -32,19 +32,23 @@ fun Settings() {
     KagiSummarizerTheme {
         ProvidePreferenceLocals {
             LazyColumn(modifier = Modifier.fillMaxSize()) {
-                listPreference(key = "kagi_language",
+                listPreference(
+                    key = "kagi_language",
                     defaultValue = "Default",
                     values = SUMMARY_LANGUAGES.keys.toList(),
                     title = { Text(text = "Summary Language") },
-                    summary = { Text(text = it) })
-                listPreference(key = "kagi_translate_source_language",
+                    summary = { Text(text = it) },
+                )
+                listPreference(
+                    key = "kagi_translate_source_language",
                     defaultValue = "Automatic",
                     values = TRANSLATE_LANGUAGES,
                     title = { Text(text = "Translation Source Language") },
-                    summary = { Text(text = it) })
+                    summary = { Text(text = it) },
+                )
                 listPreference(key = "kagi_translate_target_language",
                     defaultValue = "English",
-                    values = TRANSLATE_LANGUAGES,
+                    values = TRANSLATE_LANGUAGES.slice(1..TRANSLATE_LANGUAGES.lastIndex),
                     title = { Text(text = "Translation Target Language") },
                     summary = { Text(text = it) })
                 switchPreference(key = "custom_tab",

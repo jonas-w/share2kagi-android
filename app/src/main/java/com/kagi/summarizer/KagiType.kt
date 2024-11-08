@@ -1,12 +1,12 @@
 package com.kagi.summarizer
 
 sealed class KagiType {
-    object TRANSLATE : KagiType()
+    data object TRANSLATE : KagiType()
 
     sealed class SUMMARY : KagiType() {
-        object DISCUSS : SUMMARY()
-        object TAKEAWAY : SUMMARY()
-        object DEFAULT : SUMMARY()
+        data object DISCUSS : SUMMARY()
+        data object TAKEAWAY : SUMMARY()
+        data object DEFAULT : SUMMARY()
     }
 }
 //

@@ -3,16 +3,38 @@ package com.kagi.summarizer
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import android.preference.PreferenceManager
 import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.preference.PreferenceManager
 import java.util.regex.Matcher
 
 class HandleShare {
     companion object {
-        fun launchURL(activity: ComponentActivity, preferences: SharedPreferences, intentUrl: Uri) {
+        fun openKagi(activity: ComponentActivity, kagiType: KagiType) {
+            val sharedText = activity.intent.getStringExtra(Intent.EXTRA_TEXT)
+            val urlMatcher = Patterns.WEB_URL.matcher(sharedText.toString())
+
+            val preferences =
+                PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
+
+            if (kagiType is KagiType.SUMMARY) {
+                summary(
+                    activity, kagiType, sharedText, urlMatcher, preferences
+                )
+            } else if (kagiType is KagiType.TRANSLATE) {
+                translate(
+                    activity, sharedText, urlMatcher, preferences
+                )
+            }
+
+            activity.finish()
+        }
+
+        private fun launchURL(
+            activity: ComponentActivity, preferences: SharedPreferences, intentUrl: Uri
+        ) {
             if (preferences.getBoolean("custom_tab", false)) {
                 val intent: CustomTabsIntent = CustomTabsIntent.Builder().build()
                 intent.launchUrl(activity, intentUrl)
@@ -26,14 +48,14 @@ class HandleShare {
             }
         }
 
-        fun summary(
+        private fun summary(
             activity: ComponentActivity,
             kagiType: KagiType.SUMMARY,
             sharedText: String?,
             urlMatcher: Matcher,
             preferences: SharedPreferences
         ) {
-            val summaryLanguage = preferences.getString("kagi_language", "Default") ?: "Default"
+            val summaryLanguage = preferences.getString("kagi_language", "Default")
 
             val builder = Uri.Builder().scheme("https").authority("kagi.com")
 
@@ -54,7 +76,7 @@ class HandleShare {
             }
 
             if (urlMatcher.matches()) {
-                builder.appendQueryParameter("url", Uri.encode(urlMatcher.group().toString()))
+                builder.appendQueryParameter("url", urlMatcher.group().toString())
             } else {
                 if (activity is DiscussActivity) {
                     Toast.makeText(
@@ -70,24 +92,6 @@ class HandleShare {
             launchURL(activity, preferences, builder.build())
         }
 
-        fun openKagi(activity: ComponentActivity, kagiType: KagiType) {
-            val sharedText = activity.intent.getStringExtra(Intent.EXTRA_TEXT)
-            val urlMatcher = Patterns.WEB_URL.matcher(sharedText.toString())
-
-            val preferences =
-                PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
-            if (kagiType is KagiType.SUMMARY) {
-                summary(
-                    activity, kagiType, sharedText, urlMatcher, preferences
-                )
-            } else if (kagiType is KagiType.TRANSLATE) {
-                translate(
-                    activity, sharedText, urlMatcher, preferences
-                )
-            }
-
-            activity.finish()
-        }
 
         private fun translate(
             activity: ComponentActivity,
@@ -96,9 +100,8 @@ class HandleShare {
             preferences: SharedPreferences
         ) {
             val sourceLanguage =
-                preferences.getString("kagi_translate_source_language", "Automatic") ?: "Automatic"
-            val targetLanguage =
-                preferences.getString("kagi_translate_target_language", "English") ?: "English"
+                preferences.getString("kagi_translate_source_language", "Automatic")
+            val targetLanguage = preferences.getString("kagi_translate_target_language", "English")
             val builder = Uri.Builder().scheme("https").authority("translate.kagi.com")
 
             if (urlMatcher.matches()) {

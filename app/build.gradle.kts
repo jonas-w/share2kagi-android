@@ -1,50 +1,51 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.dependency.analysis)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.kagi.summarizer"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.kagi.summarizer"
         minSdk = 29
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "2.0"
-
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
+
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-dev"
             resValue("string", "app_name", "(Debug) Kagi Summarizer")
-            resValue("string", "app_icon", "@mipmap/kagi_launcher_debug")
-            resValue("string", "app_icon_round", "@mipmap/kagi_launcher_debug_round")
+            resValue("drawable", "app_icon", "@mipmap/kagi_launcher_debug")
+            resValue("drawable", "app_icon_round", "@mipmap/kagi_launcher_debug_round")
             isDebuggable = true
         }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("debug")
+
             resValue("string", "app_name", "Kagi Summarizer")
-            resValue("string", "app_icon", "@mipmap/kagi_launcher_icon")
-            resValue("string", "app_icon_round", "@mipmap/kagi_launcher_icon_round")
+            resValue("drawable", "app_icon", "@mipmap/kagi_launcher_icon")
+            resValue("drawable", "app_icon_round", "@mipmap/kagi_launcher_icon_round")
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -60,18 +61,19 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.browser:browser:1.7.0")
-    implementation("me.zhanghai.compose.preference:library:1.0.0")
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.ui.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.browser)
+    implementation(libs.androidx.preference)
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.compose.preference)
+}
+tasks.named { name -> name.contains("Test") }.configureEach {
+    enabled = false
 }
