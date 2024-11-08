@@ -14,17 +14,29 @@ android {
         versionCode = 1
         versionName = "2.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "(Debug) Kagi Summarizer")
+            resValue("string", "app_icon", "@mipmap/kagi_launcher_debug")
+            resValue("string", "app_icon_round", "@mipmap/kagi_launcher_debug_round")
+            isDebuggable = true
+        }
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
             signingConfig = signingConfigs.getByName("debug")
+            resValue("string", "app_name", "Kagi Summarizer")
+            resValue("string", "app_icon", "@mipmap/kagi_launcher_icon")
+            resValue("string", "app_icon_round", "@mipmap/kagi_launcher_icon_round")
         }
     }
     compileOptions {
@@ -61,13 +73,5 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.browser:browser:1.7.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("me.zhanghai.compose.preference:library:1.0.0")
 }

@@ -6,6 +6,6 @@ import androidx.activity.ComponentActivity
 class DiscussActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        HandleShare.openKagi(this, KagiSumType.DISCUSS)
+        HandleShare.openKagi(this, KagiType.SUMMARY.DISCUSS)
     }
 }

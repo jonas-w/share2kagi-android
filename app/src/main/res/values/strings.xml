@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Kagi Summarizer</string>
     <string name="activity_summary">Summary</string>
     <string name="activity_takeaway">Key Moments</string>
     <string name="activity_discuss">Discuss</string>
     <string name="title_activity_main">Kagi Summarizer</string>
+    <string name="activity_translate">Translate</string>
 </resources>

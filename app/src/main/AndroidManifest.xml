@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/kagi_launcher_icon"
+        android:icon="@string/app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/kagi_launcher_icon_round"
+        android:roundIcon="@string/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KagiSummarizer"
         tools:targetApi="31">
@@ -55,6 +55,20 @@
             android:exported="true"
             android:label="@string/activity_discuss"
             android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TranslateActivity"
+            android:exported="true"
+            android:label="@string/activity_translate"
+            android:theme="@android:style/Theme.NoDisplay"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 

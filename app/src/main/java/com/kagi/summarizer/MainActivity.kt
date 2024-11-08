@@ -36,10 +36,18 @@ fun Settings() {
                     defaultValue = "Default",
                     values = SUMMARY_LANGUAGES.keys.toList(),
                     title = { Text(text = "Summary Language") },
-                    summary = { Text(text = it) }
-                )
-                switchPreference(
-                    key = "custom_tab",
+                    summary = { Text(text = it) })
+                listPreference(key = "kagi_translate_source_language",
+                    defaultValue = "Automatic",
+                    values = TRANSLATE_LANGUAGES,
+                    title = { Text(text = "Translation Source Language") },
+                    summary = { Text(text = it) })
+                listPreference(key = "kagi_translate_target_language",
+                    defaultValue = "English",
+                    values = TRANSLATE_LANGUAGES,
+                    title = { Text(text = "Translation Target Language") },
+                    summary = { Text(text = it) })
+                switchPreference(key = "custom_tab",
                     defaultValue = true,
                     title = { Text(text = "Open Summary in Custom Tab") })
             }
