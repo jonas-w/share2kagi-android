@@ -62,9 +62,7 @@ fun ShareButtons() {
             modifier = Modifier.padding(30.dp) // Add padding for better readability
         )
         Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .padding(bottom = 16.dp)
+            horizontalArrangement = Arrangement.Center, modifier = Modifier.padding(bottom = 16.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,

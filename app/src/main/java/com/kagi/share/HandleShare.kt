@@ -12,6 +12,10 @@ import java.util.regex.Matcher
 
 class HandleShare {
     companion object {
+        private fun getKagiURLBuilder(): Uri.Builder {
+            return Uri.Builder().scheme("https").authority("kagi.com")
+        }
+
         fun openKagi(activity: ComponentActivity, kagiType: KagiType) {
             val sharedText = activity.intent.getStringExtra(Intent.EXTRA_TEXT)
             val urlMatcher = Patterns.WEB_URL.matcher(sharedText.toString())
@@ -43,7 +47,7 @@ class HandleShare {
             preferences: SharedPreferences
         ) {
             if (urlMatcher.matches()) {
-                val builder = Uri.Builder().scheme("https").authority("kagi.com")
+                val builder = getKagiURLBuilder()
                 builder.path("images").appendQueryParameter("q", urlMatcher.group().toString())
                     .appendQueryParameter("reverse", "reference")
                 launchURL(activity, preferences, builder.build())
@@ -81,7 +85,7 @@ class HandleShare {
         ) {
             val summaryLanguage = preferences.getString("kagi_language", "Default")
 
-            val builder = Uri.Builder().scheme("https").authority("kagi.com")
+            val builder = getKagiURLBuilder()
 
             if (kagiType != KagiType.SUMMARY.DISCUSS) {
                 if (summaryLanguage != "Default") {
@@ -126,7 +130,7 @@ class HandleShare {
             val sourceLanguage =
                 preferences.getString("kagi_translate_source_language", "Automatic")
             val targetLanguage = preferences.getString("kagi_translate_target_language", "English")
-            val builder = Uri.Builder().scheme("https").authority("translate.kagi.com")
+            val builder = getKagiURLBuilder()
 
             if (urlMatcher.matches()) {
                 if (sourceLanguage != "Automatic") {

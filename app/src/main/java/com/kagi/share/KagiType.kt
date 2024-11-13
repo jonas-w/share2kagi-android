@@ -10,7 +10,3 @@ sealed class KagiType {
         data object DEFAULT : SUMMARY()
     }
 }
-//
-//enum class KagiSumType {
-//    SUMMARY, TAKEAWAY, DISCUSS,
-//}
